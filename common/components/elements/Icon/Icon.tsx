@@ -7,10 +7,13 @@ export const IconComponentsRegistry = {
     Download: DownloadIcon,
     ChevronDown: ChevronDownIcon,
     Share: ShareIcon,
+    Email: FontAwesomeLogos.FaRegEnvelope,
     Facebook: FontAwesomeLogos.FaFacebook,
+    Linkedin: FontAwesomeLogos.FaLinkedin,
     Twitter: FontAwesomeLogos.FaTwitter,
     Github: FontAwesomeLogos.FaGithub,
     Instagram: FontAwesomeLogos.FaInstagram,
+    ArrowRight: FontAwesomeLogos.FaArrowRight,
 }
 
 export const IconSizesRegistry = {
