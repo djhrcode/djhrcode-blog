@@ -3,7 +3,7 @@ import { markdownToProps } from "~/common/utilities/markdown/markdownToProps";
 import { createPostEntity, PostEntity } from "~/modules/post/domain/PostEntity";
 import { PostRepository } from "~/modules/post/domain/PostRepository";
 
-const POSTS_DIRECTORY = "/home/djhrcode/djhrcode/djhrcode-blog/.data/posts";
+const POSTS_DIRECTORY = process.env.FILESYSTEM_STORAGE + "/posts";
 
 export function PostRepository(): PostRepository {
     return {
