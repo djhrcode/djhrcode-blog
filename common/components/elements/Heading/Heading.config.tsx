@@ -2,7 +2,7 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 
 export const HeadingConfig: ComponentStyleConfig = {
     baseStyle: {
-        fontWeight: 500,
-        letterSpacing: "tight"
+        fontWeight: 700,
+        letterSpacing: "-0.02em"
     },
 }

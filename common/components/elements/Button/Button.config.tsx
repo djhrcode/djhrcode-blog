@@ -9,8 +9,13 @@ export const CustomColorSchemes = new Set([
 
 export const ButtonConfig = {
     baseStyle: {
-        fontWeight: 500,
+        fontWeight: 600,
         letterSpacing: "tight"
+    },
+    sizes: {
+        xl: {
+            fontSize: "1.275rem"
+        }
     },
     variants: {
         ghost: ({ colorScheme }) => {

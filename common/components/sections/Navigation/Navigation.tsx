@@ -10,9 +10,9 @@ export const Navigation: React.FunctionComponent = function (props) {
             <Flex alignItems="center">
                 <Flex>
                     <NextLink href="/">
-                        <Box width={150}>
+                        <Box width={188}>
                             <Image
-                                width={140}
+                                width={172}
                                 height={30}
                                 src="/logo.svg"
                             ></Image>

@@ -1,5 +1,7 @@
 .container {
   /* padding: 0 rem; */
+  max-width: 760px;
+  margin: auto;
 }
 
 .main {

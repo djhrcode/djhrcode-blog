@@ -9,11 +9,14 @@ import { PostRepository } from "~/modules/post/repository/PostRepository";
 const BlogPostPage: NextPage<BlogPostPageProps> = function (props) {
     console.log("post", props);
     // JSX
-    // 
+    //
     return (
         <Post>
-            <div className="post-page">hello</div>
             <PostHeader
+                title={props.post.data.title}
+                date={props.post.data.date}
+                description={props.post.data.description}
+                readingTime={props.post.data.readingTime}
             ></PostHeader>
             <PostContent content={props.post.content}></PostContent>
             <PostFooter tags={props.post.data.tags}></PostFooter>

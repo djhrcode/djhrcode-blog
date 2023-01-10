@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import {
     Box,
     Button,
@@ -8,6 +8,7 @@ import {
     IconButton,
     ListItem,
     Spacer,
+    Tag,
     Text,
     useColorMode,
     useColorModeValue,
@@ -19,39 +20,19 @@ import styles from "../styles/Home.module.css";
 import { decorateComponent } from "../utilities/decorateComponent";
 import { useState } from "react";
 import { Icon } from "~/common/components/elements/Icon/Icon";
+import { Card } from "~/common/components/elements/Card/Card";
+import { PostRepository } from "~/modules/post/repository/PostRepository";
+import { PostEntity } from "~/modules/post/domain/PostEntity";
 
-const HomePage: NextPage = () => {
+type HomePageProps = {
+    posts: PostEntity[];
+};
+
+const HomePage: NextPage = ({ posts = [] }: HomePageProps) => {
     const boxShadowColor = useColorModeValue(
         "whiteAlpha.100",
         "whiteAlpha.100"
     );
-    const [posts] = useState([
-        {
-            title: "Here goes a sample title for any random article post I will write",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque nisl porttitor congue sit viverra consec...",
-        },
-        {
-            title: "Here goes a sample title for any random article post I will write",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque nisl porttitor congue sit viverra consec...",
-        },
-        {
-            title: "Here goes a sample title for any random article post I will write",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque nisl porttitor congue sit viverra consec...",
-        },
-        {
-            title: "Here goes a sample title for any random article post I will write",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque nisl porttitor congue sit viverra consec...",
-        },
-        {
-            title: "Here goes a sample title for any random article post I will write",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque nisl porttitor congue sit viverra consec...",
-        },
-    ]);
 
     return (
         <div className={styles.container}>
@@ -65,29 +46,60 @@ const HomePage: NextPage = () => {
             </Head>
 
             <Box
+                display="flex"
                 flexDirection="column"
-                alignItems="flex-start"
                 marginBottom="48"
+                alignItems="center"
             >
                 <Box
                     overflow="hidden"
                     marginY="6"
                     position="relative"
                     borderRadius="50%"
-                    height="156px"
-                    width="156px"
+                    height="264px"
+                    width="264px"
                 >
                     <Image
-                        width="156"
-                        height="156"
-                        src="/profile-light.png"
+                        width="264"
+                        height="264"
+                        src="/profile_cover.png"
                     ></Image>
                 </Box>
-                <Heading color="secondary.default" size="lg" marginBottom="6">
-                    Hi, I'm Daniel Hernández
-                </Heading>
-                <Heading size="3xl">
-                    I bring to life{" "}
+                <Heading
+                    marginTop="2rem"
+                    textAlign="center"
+                    fontWeight="bold"
+                    size="2xl"
+                    maxWidth="980px"
+                >
+                    <Text
+                        display="inline"
+                        fontWeight="bold"
+                        color="secondary.default"
+                        letterSpacing="inherit"
+                    >
+                        Level up
+                    </Text>{" "}
+                    with advanced{" "}
+                    <Text
+                        display="inline"
+                        fontWeight="bold"
+                        color="primary.default"
+                        letterSpacing="inherit"
+                    >
+                        React.js
+                    </Text>{" "}
+                    and{" "}
+                    <Text
+                        display="inline"
+                        fontWeight="bold"
+                        color="accent.default"
+                        letterSpacing="inherit"
+                    >
+                        JavaScript
+                    </Text>{" "}
+                    articles
+                    {/* I bring to life{" "}
                     <Text
                         fontWeight="600"
                         color="primary.default"
@@ -95,10 +107,10 @@ const HomePage: NextPage = () => {
                     >
                         stunning
                         <br /> web applications.
-                    </Text>
+                    </Text> */}
                 </Heading>
 
-                <Text fontSize="xl" marginTop="6">
+                <Text textAlign="center" fontSize="xl" marginTop="6">
                     I’m a frontend developer based in Bogotá, CO with a strong
                     design & backend
                     <br /> experience. Currently working for ByPeople as
@@ -106,7 +118,7 @@ const HomePage: NextPage = () => {
                 </Text>
             </Box>
 
-            <Box flexDirection="column" alignItems="flex-start">
+            <Box margin="auto" flexDirection="column" alignItems="flex-start">
                 <Heading size="2xl">Latest blog posts</Heading>
 
                 <Text fontSize="xl" marginTop="6" marginBottom="14">
@@ -118,50 +130,33 @@ const HomePage: NextPage = () => {
 
                 <Grid
                     width="100%"
-                    templateColumns="repeat(auto-fill, minmax(360px, 1fr))"
                     gap={10}
                 >
                     {posts.map((post, index) => (
-                        <Box
-                            key={index}
-                            borderRadius="8px"
-                            border="solid 2px"
-                            borderColor="whiteAlpha.100"
-                            transition="ease-in-out 100ms"
-                            style={{
-                                borderCollapse: "unset",
-                            }}
-                            _hover={{
-                                boxShadow: `0px 0px 20px 0px var(--chakra-colors-primary-ghost)`,
-                                borderWidth: `2px`,
-                                borderColor: `primary.default`,
-                            }}
-                        >
-                            <Box height={300} background="whiteAlpha.100"></Box>
-                            <Box paddingY="8" paddingX="6">
-                                <Heading marginBottom="4" size="md">
-                                    {post.title}
-                                </Heading>
-                                <Text marginBottom="4" fontSize="md">
-                                    {post.description}
-                                </Text>
-                                <Flex
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                >
+                        <Card key={index}>
+                            <Card.Content>
+                                <Card.Title>{post.data.title}</Card.Title>
+                                <Card.Description>
+                                    {post.data.description}
+                                </Card.Description>
+                                <Card.Footer>
                                     <Button
                                         variant="link"
                                         colorScheme="primary"
-                                        size="lg"
+                                        size="xl"
                                     >
-                                        Read more...
+                                        Read article
                                     </Button>
-                                    <Text color="whiteAlpha.600" fontSize="md">
+                                    <Text
+                                        color="whiteAlpha.600"
+                                        fontWeight="light"
+                                        fontSize="md"
+                                    >
                                         5 mins read - 18 Aug, 2021
                                     </Text>
-                                </Flex>
-                            </Box>
-                        </Box>
+                                </Card.Footer>
+                            </Card.Content>
+                        </Card>
                     ))}
                 </Grid>
             </Box>
@@ -170,9 +165,10 @@ const HomePage: NextPage = () => {
                 <Heading size="2xl">Recent Projects</Heading>
 
                 <Text fontSize="xl" marginTop="6" marginBottom="14">
-                    I enjoy work for amazing projects and missions. Also, I
-                    usually spend part of<br /> my free time to build personal
-                    projects. Check out some of them down here.
+                    I enjoy working for amazing projects and missions. Also, I
+                    usually spend part of
+                    <br /> my free time to build personal projects. Check out
+                    some of them down here.
                 </Text>
 
                 <Grid
@@ -211,7 +207,7 @@ const HomePage: NextPage = () => {
                                     <Button
                                         variant="link"
                                         colorScheme="primary"
-                                        size="lg"
+                                        size="xl"
                                     >
                                         Read more...
                                     </Button>
@@ -286,12 +282,12 @@ const HomePage: NextPage = () => {
                     <Flex>
                         <Button
                             size="lg"
-                            variant="solid"
+                            variant="ghost"
                             colorScheme="primary"
                             marginRight="4"
                             rightIcon={<Icon name="Email"></Icon>}
                         >
-                            Send me an email
+                            Subscribe
                         </Button>
                         <Button
                             size="lg"
@@ -323,5 +319,13 @@ const HomePage: NextPage = () => {
 };
 
 HomePage.displayName = "HomePage";
+
+export const getStaticProps: GetStaticProps = () => {
+    return {
+        props: {
+            posts: PostRepository().getAll(),
+        },
+    };
+};
 
 export default HomePage;

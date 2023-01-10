@@ -15,7 +15,7 @@ export type DecoratorFunctionComponent<
             Component: C
         ) => React.ForwardRefRenderFunction<React.ComponentRef<C>, Extend & React.ComponentProps<C>>
     ): DecoratorFunctionComponent<C, React.ComponentProps<C> & Extend>;
-} & React.FunctionComponent<React.ComponentProps<C> & Props>;
+} & React.JSXElementConstructor<React.ComponentProps<C> & Props>;
 
 export function decorateComponent<C extends React.FunctionComponent<any>>(
     Component: C

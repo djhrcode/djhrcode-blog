@@ -1,16 +1,16 @@
 export const ThemeColors = {
 
     primary: {
-        ghost: "#735CFF20",
-        ghostHover: "#735CFF40",
+        ghost: "#15C7FF20",
+        ghostHover: "#15C7FF40",
 
         solid: "linear-gradient(66.21deg, #4200FF -19.2%, #9500A3 34.32%, #E00051 85.65%)",
 
-        default: "#938AFF",
+        default: "#15C7FF",
 
         50: "#E7E5FF",
         100: "#BDB7FF",
-        200: "#938AFF",
+        200: "#15C7FF",
         300: "#735CFF",
         400: "#4B2EFF",
         500: "#4200FF", // you need this
